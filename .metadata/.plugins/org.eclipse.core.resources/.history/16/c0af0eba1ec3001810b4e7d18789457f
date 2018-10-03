@@ -1,0 +1,36 @@
+package no.hvl.dat108;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class Slett
+ */
+@WebServlet("/Slett")
+public class Slett extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession sesjon = request.getSession(false);
+		if (sesjon == null || sesjon.getAttribute("loggedIn") == null) {
+			response.sendRedirect("Innlogging" + "?notLoggedIn");
+		} else {
+			HandlelisteObjekt liste = (HandlelisteObjekt) sesjon.getAttribute("handleliste");
+
+			String slettes = request.getParameter("hidSlett");
+			System.out.println("vil slette " + slettes);
+			System.out.println("sletter");
+			if (liste.getHandlelisteObjekt().contains(slettes)) {
+				liste.fjernItem(slettes);
+			}
+		}
+		response.sendRedirect("Handleliste");
+	}
+
+}

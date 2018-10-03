@@ -1,0 +1,87 @@
+package no.hvl.dat108;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.el.ListELResolver;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class Handleliste
+ */
+@WebServlet("/Handleliste")
+public class Handleliste extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession sesjon = request.getSession();
+
+		if (sesjon != null || request.getSession().getAttribute("loggedIn") != null) {
+			HandlelisteObjekt liste = (HandlelisteObjekt) request.getSession().getAttribute("handleliste");
+
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<meta charset=\"UTF-8\">");
+			out.println("<title>Innlogging</title>");
+			out.println("<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" integrity=\"sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO\" crossorigin=\"anonymous\">");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<div class=\"jumbotron\" style=\"width:30%; margin-left:auto; margin-right:auto\">");
+			out.println("<div class=\"container\">");
+			out.println("<h3>Handleliste</h3>");
+			out.println("<form action=\"Handleliste\" method=\"post\" class=\"form-inline\" style=\"width:100%\">");
+			out.println("<input type=\"text\" class=\"form-control mb-2 mr-sm-2\" name=\"leggTilVare\""
+					+ " placeholder=\"Legg til vare..\">");
+			out.println("<button type=\"submit\" class=\"btn btn-primary mb-2\">Legg Til</button>");
+			out.println("</form>");
+			out.println("<ul class=\"list-group\" style=\"width:100%\">");
+			if (liste.getHandlelisteObjekt().isEmpty()) {
+				out.println("<br><h5>Handlelisten er tom</h5>");
+			} else {
+				for (String item : liste.getHandlelisteObjekt()) {
+					out.println("<form action=\"Slett\" method=\"post\">"
+							+ "<input type=\"hidden\" name=\"slettLi\" value=" + item +">"
+							+ "<li class=\"list-group-item\" style=\"height:4%\">" + item + "<span class=\"float-right button-group\">"
+							+ "<button type=\"submit\" class=\"btn btn-danger\"><span class=\"glyphicon glyphicon-remove\"></span>Slett</button>"
+							+ "</li></form>");
+				}
+			}
+			out.println("</ul>");
+			out.println("</div>");
+			out.println("</div>");
+			out.println("</body>");
+			out.println("</html>");
+		} else {
+			response.sendRedirect("Innlogging" + "?notLoggedIn");
+		}
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String nyVare = request.getParameter("leggTilVare");
+
+		HttpSession sesjon = request.getSession(false);
+		if (sesjon == null || sesjon.getAttribute("loggedIn") == null) {
+			response.sendRedirect("Innlogging" + "?notLoggedIn");
+		} else {
+			HandlelisteObjekt liste = (HandlelisteObjekt) sesjon.getAttribute("handleliste");
+
+			if (nyVare != null && nyVare != "" && liste != null) {
+				liste.leggTil(nyVare);
+			}
+
+			response.sendRedirect("Handleliste");
+		}
+	}
+
+}
