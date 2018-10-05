@@ -24,7 +24,7 @@ public class Handleliste extends HttpServlet {
 		HttpSession sesjon = request.getSession();
 
 		if (sesjon != null && request.getSession().getAttribute("loggedIn") != null) {
-			HandlelisteObjekt liste = (HandlelisteObjekt) request.getServletContext().getAttribute("handleliste");
+			HandlelisteObjekt liste = (HandlelisteObjekt) request.getSession().getAttribute("handleliste");
 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -83,7 +83,7 @@ public class Handleliste extends HttpServlet {
 		} else {
 			//Bruker har godkjent session
 			
-			HandlelisteObjekt liste = (HandlelisteObjekt) request.getServletContext().getAttribute("handleliste");
+			HandlelisteObjekt liste = (HandlelisteObjekt) sesjon.getAttribute("handleliste");
 			
 			//Sjekker om det skal legges til eller slettes vare
 			if(request.getParameter("slettLi") == null) {

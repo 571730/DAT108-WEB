@@ -69,11 +69,8 @@ public class Innlogging extends HttpServlet {
 			sesjon.setMaxInactiveInterval(tidInactive);
 
 			sesjon.setAttribute("loggedIn", "yes");
-			//Sjekker om det finnes en handlevogn, eller oppretter
-			if(servletContext.getAttribute("handleliste") == null) {
-				servletContext.setAttribute("handleliste", new HandlelisteObjekt());
-			}
-			
+			// Inn noe kode her i forbindelse med oppretting av sesjonsdata?
+			servletContext.setAttribute("handleliste", new HandlelisteObjekt());
 			response.sendRedirect("Handleliste");
 		} else {
 			response.sendRedirect("Innlogging" + "?feil='ja'");

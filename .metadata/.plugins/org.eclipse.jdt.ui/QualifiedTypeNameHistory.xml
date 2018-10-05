@@ -13,4 +13,5 @@
 <fullyQualifiedTypeName name="org.apache.commons.lang.StringEscapeUtils"/>
 <fullyQualifiedTypeName name="org.junit.Before"/>
 <fullyQualifiedTypeName name="no.hvl.dat108.HandlelisteObjekt"/>
+<fullyQualifiedTypeName name="javax.servlet.ServletContext"/>
 </qualifiedTypeNameHistroy>

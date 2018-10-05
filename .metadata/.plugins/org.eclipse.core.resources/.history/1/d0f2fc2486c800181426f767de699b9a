@@ -3,7 +3,6 @@ package no.hvl.dat108;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -56,7 +55,6 @@ public class Innlogging extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String innPass = request.getParameter("passord");
 		String riktigPass = this.getInitParameter("Passord");
-		ServletContext servletContext = request.getServletContext();
 		if(innPass.equals(riktigPass)) {
 			HttpSession sesjon = request.getSession(false);
 			if (sesjon != null) {
@@ -69,11 +67,8 @@ public class Innlogging extends HttpServlet {
 			sesjon.setMaxInactiveInterval(tidInactive);
 
 			sesjon.setAttribute("loggedIn", "yes");
-			//Sjekker om det finnes en handlevogn, eller oppretter
-			if(servletContext.getAttribute("handleliste") == null) {
-				servletContext.setAttribute("handleliste", new HandlelisteObjekt());
-			}
-			
+			// Inn noe kode her i forbindelse med oppretting av sesjonsdata?
+			sesjon.setAttribute("handleliste", new HandlelisteObjekt());
 			response.sendRedirect("Handleliste");
 		} else {
 			response.sendRedirect("Innlogging" + "?feil='ja'");
