@@ -1,0 +1,54 @@
+.mainEl{
+	width: 30%; 
+	margin: 0 auto;
+	background-color: #7168ec;
+	border-radius: 10px;
+}
+
+.title{
+	font-size: 2em;
+	font-weight: 100;
+	text-align: center;
+	color: white;
+	padding: 1em;
+}
+
+.knapp{
+	transition: background-color 0.5s ease;
+	background-color: #a200bf;
+	border-radius: 5px;
+	margin: 0 auto;
+}
+
+.knapp:hover{
+	background-color: #8000b4;
+}
+
+.center{
+	margin: 0 auto;
+}
+
+.linkbox{
+	text-align: center;
+}
+
+.spacer{
+	margin: 1em;
+}
+
+.link{
+	color: white;
+	margin-top: 1em;
+	display: inline-block;
+	margin-bottom: 1em;
+	text-align: center;
+	padding: 1em;
+	border-radius: 5px;
+	background-color: #a200bf;
+	transition: background-color 0.5s ease;
+	text-decoration: none;
+}
+
+.link:hover{
+	background-color: #8000b4;
+}
