@@ -30,24 +30,23 @@ public class LoggInnServlet extends HttpServlet {
     
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LoggInnSkjema skjema = new LoggInnSkjema(request);
+		LoggInnSkjema skjemaLogg = new LoggInnSkjema(request);
 		
-		if(skjema.sjekkInnlogging(dEAO)) {
+		if(skjemaLogg.sjekkInnlogging(dEAO)) {
 			HttpSession sesjon = request.getSession(false);
 			if (sesjon != null) {
 				sesjon.invalidate();
 			}
 
 			sesjon = request.getSession(true);
-			//Henter tid til inactive fra init paramter i xml-fil
-			//int tidInactive = Integer.parseInt(this.getInitParameter("Tid"));
+			
 			sesjon.setMaxInactiveInterval(1000);
-			sesjon.setAttribute("loggedIn", skjema.getMobil());
+			sesjon.setAttribute("loggedIn", skjemaLogg.getMobil());
 			response.sendRedirect("deltakerliste");
 		}
 		else {
-			skjema.feilMelding();
-			request.getSession().setAttribute("skjema", skjema);
+			skjemaLogg.feilMelding();
+			request.getSession().setAttribute("skjemaLogg", skjemaLogg);
 			response.sendRedirect("logginn");
 		}
 		

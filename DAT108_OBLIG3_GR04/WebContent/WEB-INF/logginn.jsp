@@ -12,10 +12,12 @@
 <body>
 	<div class="mainEl">
 	<h2 class="title">Logg inn</h2>
+	<div class="spacer">
 	<p>${notLoggedIn}</p>
 	<p>
-		<font color="red">${skjema.feilInnlogging}</font>
+		<font color="red">${skjemaLogg.feilInnlogging}</font>
 	</p>
+	</div>
 	<form method="post" class="pure-form pure-form-aligned">
 		<fieldset>
 			<div class="pure-control-group">

@@ -19,7 +19,7 @@ public class BekreftelseServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession sesjon = request.getSession();
+		HttpSession sesjon = request.getSession(false);
 		
 		if(sesjon != null && request.getSession().getAttribute("loggedIn") != null) {
 			request.getRequestDispatcher("WEB-INF/bekreftelse.jsp")

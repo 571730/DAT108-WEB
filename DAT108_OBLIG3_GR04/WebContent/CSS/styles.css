@@ -1,5 +1,5 @@
 .mainEl{
-	width: 30%; 
+	width: 40%; 
 	margin: 0 auto;
 	background-color: #7168ec;
 	border-radius: 10px;
@@ -51,4 +51,11 @@
 
 .link:hover{
 	background-color: #8000b4;
+}
+
+#feilPassord{
+	padding: 3px;
+	border-radius: 5px;
+	border: solid 1px;
+	border-color: #7168ec;
 }

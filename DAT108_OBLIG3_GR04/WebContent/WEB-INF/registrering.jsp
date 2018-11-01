@@ -16,33 +16,38 @@
 	<form method="post" class="pure-form pure-form-aligned">
 		<fieldset>
 			<div class="pure-control-group">
-				<label for="fornavn">Fornavn:</label> <input 
+				<label for="fornavn">Fornavn:</label> <input
+					id="inputFornavn" 
 					placeholder="fornavn.." type="text"
 					name="fornavn" value="${skjema.fornavn}" /> 
-					<font color="red">${skjema.fornavnFeil}</font>
+					<font id="feilFornavn" color="#d72d1d">${skjema.fornavnFeil}</font>
 			</div>
 			<div class="pure-control-group">
 				<label for="etternavn">Etternavn:</label> <input 
+					id="inputEtternavn"
 					placeholder="etternavn.." type="text"
 					name="etternavn" value="${skjema.etternavn}" /> 
-					<font color="red">${skjema.etternavnFeil}</font>
+					<font id="feilEtternavn" color="#d72d1d">${skjema.etternavnFeil}</font>
 			</div>
 			<div class="pure-control-group">
 				<label for="mobil">Mobil (8 siffer):</label> <input 
+					id="inputMobil"
 					placeholder="mobilnr.." type="text"
 					name="mobil" value="${skjema.mobil}" /> 
-					<font color="red">${skjema.mobilFeil}${brukerTatt}</font>
+					<font id="feilMobil" color="#d72d1d">${skjema.mobilFeil}${brukerTatt}</font>
 			</div>
 			<div class="pure-control-group">
 				<label for="password">Passord:</label> <input type="password"
+					id="passordEnInput"
 					name="passord" value="${skjema.passordEn}" placeholder="Minst 5 tegn.." /> 
-					<font color="red">${skjema.passordFeil}</font>
+					<font id="feilPassord" color="#d72d1d">${skjema.passordFeil}</font>
 			</div>
 			<div class="pure-control-group">
 				<label for="passordRepetert">Passord repetert:</label> <input
+					id="passordToInput"
 					type="password" name="passordRepetert"
 					value="${skjema.passordTo}" /> 
-					<font color="red">${skjema.passordFeilLikhet}</font>
+					<font id="feilPassordMatch" color="#d72d1d">${skjema.passordFeilLikhet}</font>
 			</div>
 			<div class="pure-control-group">
 				<label for="kjonn">Kjønn:</label> 
@@ -58,5 +63,6 @@
 		</fieldset>
 	</form>
 	</div>
+	<script defer type="text/javascript" charset="ISO-8859-1" src="${pageContext.request.contextPath}/JS/scripts.js"></script>
 </body>
 </html>
